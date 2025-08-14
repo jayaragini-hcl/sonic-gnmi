@@ -44,7 +44,8 @@ const (
 	GNMI_SET_FAIL
 	GNOI_REBOOT
 	GNOI_FACTORY_RESET
-	GNOI_OS_INSTALL
+	GNOI_HEALTHZ_CHECK
+	GNOI_HEALTHZ_COLLECT
 	DBUS
 	DBUS_FAIL
 	DBUS_APPLY_PATCH_DB
@@ -81,8 +82,10 @@ func (c CounterType) String() string {
 		return "GNOI reboot"
 	case GNOI_FACTORY_RESET:
 		return "GNOI Factory Reset"
-	case GNOI_OS_INSTALL:
-		return "GNOI OS Install"
+	case GNOI_HEALTHZ_CHECK:
+		return "GNOI Healthz Check"
+	case GNOI_HEALTHZ_COLLECT:
+		return "GNOI Healthz Collect"
 	case DBUS:
 		return "DBUS"
 	case DBUS_FAIL:

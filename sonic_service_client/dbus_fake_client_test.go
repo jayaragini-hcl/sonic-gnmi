@@ -43,12 +43,19 @@ func TestFakeClientMethods(t *testing.T) {
 	assert.Equal(t, "", output)
 	assert.Equal(t, "Previous reset is ongoing", err.Error())
 
-	output, err = client.InstallOS("stable")
+	output, err = client.HealthzCollect("collect-event")
 	assert.NoError(t, err)
-	assert.Equal(t, "stable", output)
-
-	output, err = client.InstallOS("")
+	assert.Equal(t, "/tmp/dump/fake-collect-success", output)
+	output, err = client.HealthzCollect("")
 	assert.Error(t, err)
 	assert.Equal(t, "", output)
-	assert.Equal(t, "invalid OS install request", err.Error())
+	assert.Equal(t, "request cannot be empty", err.Error())
+
+	output, err = client.HealthzCheck("check-event")
+	assert.NoError(t, err)
+	assert.Equal(t, "fake-check-success", output)
+	output, err = client.HealthzCheck("")
+	assert.Error(t, err)
+	assert.Equal(t, "", output)
+	assert.Equal(t, "request cannot be empty", err.Error())
 }
